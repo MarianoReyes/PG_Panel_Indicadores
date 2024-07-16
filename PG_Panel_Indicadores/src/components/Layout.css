@@ -1,0 +1,57 @@
+.bg-orange{
+    background-color: #fe7018;
+}
+
+.header {
+    background-color: #fe7018;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+  
+.header h1 {
+    margin: 0;
+}
+
+.header nav {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.header nav a {
+    margin: 0 1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.header nav a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background-color: #fe7018;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+}
+
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+.main-content {
+    flex: 1;
+    padding: 1rem;
+}
+  

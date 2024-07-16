@@ -1,0 +1,84 @@
+.header {
+    background-color: #fe7018;
+    color: white;
+    padding: 2rem 1rem;
+    position: relative;
+    width: 100%;
+    transition: padding 0.5s, background-color 0.5s, color 0.5s;
+}
+  
+.header.sticky {
+    background-color: white;
+    color: #444;
+    padding: 1rem 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+  
+.header h1 {
+    margin: 0;
+}
+  
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.navbar .nav-link {
+    color: white;
+    transition: color 0.5s;
+}
+
+.brand-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.white-filter {
+    filter: brightness(0) invert(1);
+}
+  
+.header.sticky .navbar .nav-link {
+    color: #444;
+    transition: 0.5s all ease;
+}
+
+.header.sticky .brand-image {
+    width: 170px;
+}
+  
+.navbar .nav-link:hover {
+    text-decoration: none;
+    border-bottom: 3px solid #fe7018;
+    color: #fe7018!important;
+}
+
+.header.sticky{
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+.redes{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.redes a{
+    color: #fff;
+}
+
+.redes-sticky a{
+    color: #444!important;
+    transition: 0.5s all ease;
+}
+
+.redes-sticky a:hover{
+    text-decoration: none;
+    border-bottom: 3px solid #fe7018;
+    color: #fe7018!important;
+}
+
