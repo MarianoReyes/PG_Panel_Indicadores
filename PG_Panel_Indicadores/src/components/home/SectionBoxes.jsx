@@ -13,7 +13,7 @@ const SectionBoxes = () => {
             title="Detección de Enfermedades en Plantas" 
             text="Modelo de IA que detecta enfermedades en caña de azúcar mediante 
             análisis de imágenes, permitiendo diagnóstico temprano y manejo eficiente de cultivos." 
-            link="/page1"/>
+            link="/deteccion_enfermedades"/>
           </Col>
           <Col sm={12} xl={4}>
             <Box 
@@ -21,7 +21,7 @@ const SectionBoxes = () => {
             text="Sistema de IA que pronostica la producción de 
             toneladas de caña por hectárea. Utiliza algoritmos avanzados y datos 
             históricos para optimizar la planificación y gestión de cosechas." 
-            link="/page2"/>
+            link="/prediccion_tch"/>
           </Col>
           <Col sm={12} xl={4}>
             <Box 
@@ -29,7 +29,7 @@ const SectionBoxes = () => {
             text="Proporciona acceso unificado a datos del cultivo de caña. 
             Centraliza información de rendimiento, enfermedades y predicciones, 
             facilitando la integración y análisis para optimizar la producción" 
-            link="/page3"/>
+            link="/api"/>
           </Col>
         </Row>
       </Container>

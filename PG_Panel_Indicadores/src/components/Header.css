@@ -29,6 +29,7 @@
   
 .navbar .nav-link {
     color: white;
+    font-size: 20px!important;
     transition: 0.5s all ease;
 }
 
@@ -44,6 +45,7 @@
   
 .header.sticky .navbar .nav-link {
     color: #444;
+    font-size: 15px!important;
     transition: 0.5s all ease;
 }
 

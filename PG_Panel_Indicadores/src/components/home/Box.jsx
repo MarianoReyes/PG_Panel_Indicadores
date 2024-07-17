@@ -7,7 +7,7 @@ const Box = ({ title, text, link }) => {
     <Card className="w-100 custom-card">
       <Card.Body>
         <Card.Title className="card-title">{title}</Card.Title>
-        <Card.Text>{text}</Card.Text>
+        <Card.Text className="card-text">{text}</Card.Text>
         <a className='btn' href={link}>Ver más</a>
       </Card.Body>
     </Card>

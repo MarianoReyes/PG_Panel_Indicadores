@@ -40,7 +40,7 @@ const Header = () => {
               <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
                 <Nav className="ml-auto">
                   <Nav.Link href="/">Inicio</Nav.Link>
-                  <Nav.Link href="/about">Acerca de</Nav.Link>
+                  <Nav.Link href="/api">API</Nav.Link>
                   <Nav.Link href="/contact">Contacto</Nav.Link>
                 </Nav>
               </Navbar.Collapse>

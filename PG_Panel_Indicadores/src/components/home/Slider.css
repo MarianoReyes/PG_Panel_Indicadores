@@ -5,3 +5,28 @@
     margin: 0 auto;
 }
   
+.custom-carousel .carousel-caption {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: unset;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.1); /* Fondo semitransparente para mejor visibilidad */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.custom-carousel .carousel-caption h3,
+.custom-carousel .carousel-caption p{
+    color: #fff!important;
+    margin: 0;
+}
+  
+.custom-carousel .carousel-caption h3{
+    font-size: 40px;
+}
+
+.custom-carousel .carousel-caption p{
+    font-size: 20px;
+}
+  

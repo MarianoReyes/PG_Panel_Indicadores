@@ -23,6 +23,7 @@
     border-radius: 5px;
     margin: 10px 0 0 0;
     padding: 10px 0;
+    color: #fff;
 }
   
 .custom-card a:hover {
@@ -36,3 +37,6 @@
     height: 80px;
 }
 
+.custom-card .card-text{
+    height: 150px;
+}
