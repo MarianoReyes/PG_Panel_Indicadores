@@ -29,7 +29,7 @@
   
 .navbar .nav-link {
     color: white;
-    transition: color 0.5s;
+    transition: 0.5s all ease;
 }
 
 .brand-image {
@@ -50,11 +50,17 @@
 .header.sticky .brand-image {
     width: 170px;
 }
-  
-.navbar .nav-link:hover {
+
+.header.sticky .navbar .nav-link:hover{
     text-decoration: none;
     border-bottom: 3px solid #fe7018;
     color: #fe7018!important;
+}
+  
+.navbar .nav-link:hover {
+    text-decoration: none;
+    border-bottom: 3px solid #fff;
+    color: #fff!important;
 }
 
 .header.sticky{

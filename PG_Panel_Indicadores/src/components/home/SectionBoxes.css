@@ -1,0 +1,20 @@
+.section-boxes {
+    background-image: url('/slider2.jpg'); /* Ajusta la ruta de la imagen */
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .section-boxes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
+    z-index: -1;
+  }
+  
