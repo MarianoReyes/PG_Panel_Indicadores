@@ -1,0 +1,11 @@
+.ml-3 {
+    margin-left: 1rem;
+}
+  
+.accordion-body pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+  

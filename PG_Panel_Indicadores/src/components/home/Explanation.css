@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.centered h2{
+    text-align: center;
+}
+
 .centered p{
     text-align: center;
 }

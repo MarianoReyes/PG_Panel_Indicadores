@@ -15,3 +15,38 @@ p, a{
 .explanation{
     padding: 10rem;
 }
+
+.centered{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered p{
+    text-align: center;
+}
+
+.iframe{
+    height: 358px;
+    width: 100%;
+}
+
+.button{
+    background-color: #fe7018;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.5s all ease;
+}
+
+.button:hover{
+    background-color: #fff;
+    color: #fe7018;
+    border: 1px solid #fe7018;
+}
+
+.form-file {
+    margin-bottom: 15px;
+}

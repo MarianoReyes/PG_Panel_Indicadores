@@ -28,7 +28,7 @@ const SectionBoxes = () => {
             title="API" 
             text="Proporciona acceso unificado a datos del cultivo de caña. 
             Centraliza información de rendimiento, enfermedades y predicciones, 
-            facilitando la integración y análisis para optimizar la producción" 
+            facilitando la integración y análisis para optimizar la producción." 
             link="/api"/>
           </Col>
         </Row>
