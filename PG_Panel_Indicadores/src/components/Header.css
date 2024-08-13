@@ -65,6 +65,23 @@
     color: #fff!important;
 }
 
+.navbar .dropdown-menu {
+    background-color: #fff; 
+    border: none;
+    margin-top: -10px;
+    padding: 0;
+}
+  
+.navbar .dropdown-menu .dropdown-item {
+    color: #000;
+    padding: 10px 20px;
+}
+  
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: transparent; 
+    color: #fe7018; 
+}
+
 .header.sticky{
     box-shadow: 1px 1px 1px #ccc;
 }
@@ -103,4 +120,4 @@
     .order-md-3 {
       order: 2;
     }
-  }
+}

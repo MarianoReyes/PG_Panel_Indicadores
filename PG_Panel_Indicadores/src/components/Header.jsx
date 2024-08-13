@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faTiktok } from '@fortawesome/free-brands-svg-icons';
@@ -48,6 +48,10 @@ const Header = () => {
                   <Nav.Link href="/">Inicio</Nav.Link>
                   <Nav.Link href="/api">API</Nav.Link>
                   <Nav.Link href="/contact">Contacto</Nav.Link>
+                  <NavDropdown title="Modelos" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/deteccion_enfermedades">Detección de Enfermedades</NavDropdown.Item>
+                    <NavDropdown.Item href="/prediccion_tch">Predicción TCH</NavDropdown.Item>
+                  </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
             </Col>

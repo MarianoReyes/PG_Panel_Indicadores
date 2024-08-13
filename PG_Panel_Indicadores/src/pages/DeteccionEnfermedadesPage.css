@@ -1,0 +1,21 @@
+.button-page {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: 0.5s all ease;
+  border: none!important;
+  background: #fe7018!important;
+  border-radius: 5px;
+  margin: 10px 0 0 0;
+  padding: 10px 0;
+  color: #fff;
+  transition: 0.5s all ease;
+}
+
+.button-page:hover {
+  border: 1px solid #fe7018!important;
+  background-color: #fff!important;
+  color: #fe7018!important;
+}
