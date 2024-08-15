@@ -36,13 +36,13 @@ p, a{
     background-color: #fe7018;
     border-radius: 5px;
     padding: 10px 15px;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     transition: 0.5s all ease;
 }
 
 .button:hover{
-    background-color: #fff;
+    background-color: #000;
     color: #fe7018;
     border: 1px solid #fe7018;
 }

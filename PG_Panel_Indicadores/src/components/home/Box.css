@@ -24,13 +24,13 @@
     border-radius: 5px;
     margin: 10px 0 0 0;
     padding: 10px 0;
-    color: #fff;
+    color: #000;
 }
   
 .custom-card a:hover {
     border: 1px solid #fe7018;
     background-color: #fff;
-    color: #fe7018;
+    color: #000;
 }
  
 .custom-card .card-title {
