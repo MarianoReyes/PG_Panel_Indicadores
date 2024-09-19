@@ -29,7 +29,7 @@ const Header = () => {
           <Row className="w-100">
             <Col xs={6} md={3} className="order-md-1">
               <img
-                src="/Logo-Pantaleon.png"
+                src="/Logo-Pantaleon.webp"
                 alt="Brand Image"
                 className={`brand-image ${isSticky ? '' : 'white-filter'}`}
               />

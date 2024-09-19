@@ -7,7 +7,7 @@ import TchMap from '../components/tch/TchMap';
 const PrediccionTchPage = () => {
   const slides = [
     {
-      image: '/slider4.jpg',
+      image: '/slider4.webp',
       title: 'Modelo para predecir el TCH',
       description: 'Con datos históricos, predecimos como serán las plantaciones futuras',
     },

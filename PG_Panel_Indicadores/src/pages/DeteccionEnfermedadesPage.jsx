@@ -18,7 +18,7 @@ const DeteccionEnfermedadesPage = () => {
 
   const slides = [
     {
-      image: '/slider2.jpg',
+      image: '/slider2.webp',
       title: 'Modelo para la detección de enfermedades en la caña',
       description: 'Con datos recogidos en campo, mostramos las enfermedades que afectan'
     }

@@ -7,7 +7,7 @@ import './ApiPage.css';
 const ApiPage = () => {
   const slides = [
     {
-      image: '/slider1.jpg',
+      image: '/slider1.webp',
       title: 'API para el consumo de datos',
       description: 'Todos los datos centralizados en una sola solución'
     }
