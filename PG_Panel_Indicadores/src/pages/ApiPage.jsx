@@ -1,5 +1,4 @@
-import React from 'react';
-import { Container, Row, Col, Button, Accordion } from 'react-bootstrap';
+import { Container, Row, Col, Accordion } from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import './ApiPage.css';
 
@@ -34,7 +33,7 @@ const ApiPage = () => {
                 <Accordion.Body>
                   <h5>Descargar Datos</h5>
                   <p>
-                    Haz clic en el botón "Descargar Datos" para obtener un archivo CSV con los datos de cultivo de caña.
+                    Haz clic en el botón &quot;Descargar Datos&quot; para obtener un archivo CSV con los datos de cultivo de caña.
                   </p>
                   <h5>Usar Datos por URL</h5>
                   <p>

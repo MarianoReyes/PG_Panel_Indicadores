@@ -1,9 +1,6 @@
-// src/components/TchMap.js
-
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, LayersControl } from 'react-leaflet';
 import { ThreeDots } from 'react-loader-spinner'
-import L from 'leaflet';
 
 const TchMap = () => {
   const [geoData, setGeoData] = useState(null);

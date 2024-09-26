@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import * as tf from '@tensorflow/tfjs';
-import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
+import { useState, useEffect } from 'react';
+import Joyride, { EVENTS, STATUS } from 'react-joyride';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import './DeteccionEnfermedadesPage.css';
@@ -34,13 +33,14 @@ const DeteccionEnfermedadesPage = () => {
   };
 
   const handlePredict = async () => {
+    setPrediction("Hola")
     return 1;
   };
 
   const steps = [
     {
       target: '.model-description',
-      content: 'Este párrafo describe el modelo de detección de enfermedades en caña de azúcar.',
+      content: 'Entendimiento del Modelo.',
     },
     {
       target: '.upload-image',
@@ -53,7 +53,7 @@ const DeteccionEnfermedadesPage = () => {
   ];
 
   const handleJoyrideCallback = (data) => {
-    const { action, index, type, status } = data;
+    const { type, status } = data;
 
     if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
       setRunTour(false);

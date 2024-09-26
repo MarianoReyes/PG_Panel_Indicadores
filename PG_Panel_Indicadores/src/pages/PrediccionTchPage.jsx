@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Row, Col} from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import 'leaflet/dist/leaflet.css';
