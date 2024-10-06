@@ -47,11 +47,11 @@ const Header = () => {
                 <Nav className="ml-auto">
                   <Nav.Link href="/">Inicio</Nav.Link>
                   <Nav.Link href="/api">API</Nav.Link>
-                  <Nav.Link href="/contact">Contacto</Nav.Link>
                   <NavDropdown title="Modelos" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/deteccion_enfermedades">Detección de Enfermedades</NavDropdown.Item>
                     <NavDropdown.Item href="/prediccion_tch">Predicción TCH</NavDropdown.Item>
                   </NavDropdown>
+                  <Nav.Link href="/contact">Contacto</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Col>
