@@ -201,6 +201,7 @@ const TchMap = () => {
     }
   };
 
+  // estilos de las parcelas
   const style = (feature) => {
     const tchValue = parseFloat(feature.properties[selectedTCH]);
     if (!isNaN(tchValue)) {
@@ -218,23 +219,21 @@ const TchMap = () => {
       fillOpacity: 0.5,
     };
   }; 
-  
+
+  // funcion para la busqueda de un terreno por id
   const handleSearch = () => {
     if (!geoData || !searchId) {
       console.error("Los datos no están listos o no hay un ID para buscar.");
       return;
     }
-
-    // Limpieza del ID de búsqueda y eliminación de espacios extra
     const cleanSearchId = searchId.trim().toUpperCase();
 
-    // Buscar el polígono por su id
     const feature = geoData.features.find(
       (f) => f.properties.id && f.properties.id.trim().toUpperCase() === cleanSearchId
     );
 
     if (feature) {
-      setSelectedFeature(feature); // Actualizamos el polígono seleccionado
+      setSelectedFeature(feature);
     } else {
       alert('No se encontró un polígono con el ID proporcionado:', cleanSearchId);
     }
