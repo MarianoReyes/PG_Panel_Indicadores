@@ -246,8 +246,10 @@ const TchMap = () => {
         sm={11}
         xl={3}
       >
+        <h4>Mapa de Predicción de TCH</h4>
+
         {/* Filtro al lado izquierdo */}
-        <h5>Filtrar por predicción</h5>
+        <h5 className='mt-4'>Filtrar por predicción</h5>
         <ul style={{ listStyleType: 'none', padding: 0 }}>
           <li>
             <label>
@@ -308,7 +310,7 @@ const TchMap = () => {
         </ul>
 
         {/* Buscar por ID */}
-        <h5 className='mt-5'>Buscar por ID</h5>
+        <h5 className='mt-4'>Buscar por ID</h5>
         <div className='d-flex'>
           <input
             type="text"
@@ -321,7 +323,7 @@ const TchMap = () => {
         </div>
 
         {/* Botón para descargar el GeoJSON transformado */}
-        <h5 className='mt-5'>Descargar GeoJSON</h5>
+        <h5 className='mt-4'>Descargar GeoJSON</h5>
         {downloadUrl && (
           <a href={downloadUrl} download="transformed_data.geojson">
             <button className='button'>Descargar GeoJSON</button>
