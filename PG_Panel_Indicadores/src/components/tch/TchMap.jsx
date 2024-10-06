@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { Row, Col } from 'react-bootstrap';
 import 'leaflet/dist/leaflet.css';
 import proj4 from 'proj4';
 import { Oval } from 'react-loader-spinner'; // Loader
+import L from 'leaflet';
+import './tchmap.css';
+import { useMap } from 'react-leaflet';
 
-// Definir la proyección de UTM zona 15N (EPSG:32615) a latitud-longitud (EPSG:4326)
-proj4.defs("EPSG:32615", "+proj=utm +zone=15 +datum=WGS84 +units=m +no_defs");
+proj4.defs('EPSG:32615', '+proj=utm +zone=15 +datum=WGS84 +units=m +no_defs');
 
 // Función para convertir coordenadas UTM a latitud-longitud
 const convertUTMToLatLng = (coordinates) => {
-  return coordinates.map((polygon) => 
+  return coordinates.map((polygon) =>
     polygon.map((point) => {
-      if (Array.isArray(point) && point.length === 2 && isFinite(point[0]) && isFinite(point[1])) {
+      if (
+        Array.isArray(point) &&
+        point.length === 2 &&
+        isFinite(point[0]) &&
+        isFinite(point[1])
+      ) {
         try {
-          return proj4("EPSG:32615", "EPSG:4326", point);
+          return proj4('EPSG:32615', 'EPSG:4326', point);
         } catch (error) {
-          console.error("Error al transformar las coordenadas:", point, error);
           return point;
         }
       } else {
-        console.warn("Coordenadas inválidas encontradas:", point);
         return point;
       }
     })
@@ -28,42 +34,67 @@ const convertUTMToLatLng = (coordinates) => {
 
 // Función para obtener un color basado en un valor de TCHPRED
 const getColorFromTCH = (value, minTCH, maxTCH) => {
-  // Evitar divisiones por cero si minTCH es igual a maxTCH
   if (minTCH === maxTCH) {
-    return 'rgb(0, 255, 0)'; // Si el rango no tiene variación, todos son verdes
-  }
-  
-  // Si el valor no es un número válido, devolver gris
-  if (isNaN(value)) {
-    return 'rgb(200, 200, 200)'; // Gris si el valor no es válido
+    return 'rgb(0, 255, 0)';
   }
 
-  // Normalizar el valor entre 0 (rojo) y 1 (verde)
+  if (isNaN(value)) {
+    return 'rgb(200, 200, 200)';
+  }
+
   const ratio = (value - minTCH) / (maxTCH - minTCH);
-  
-  const red = Math.floor(255 * (1 - ratio));  // Más valor = menos rojo
-  const green = Math.floor(255 * ratio);      // Más valor = más verde
-  
-  return `rgb(${red}, ${green}, 0)`; // Degradado de rojo (255, 0, 0) a verde (0, 255, 0)
+
+  const red = Math.floor(255 * (1 - ratio));
+  const green = Math.floor(255 * ratio);
+
+  return `rgb(${red}, ${green}, 0)`;
+};
+
+// Componente para centrar el poligono dependiendo de la busqueda
+const CenterPolygon = ({ feature }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (feature) {
+      const coordinates = feature.geometry.coordinates[0];
+
+      const bounds = L.latLngBounds(coordinates.map(coord => [coord[1], coord[0]]));
+
+      map.fitBounds(bounds);
+
+      setTimeout(() => {
+        const currentZoom = map.getZoom();
+        map.setZoom(currentZoom - 1); 
+      }, 100); 
+
+    }
+  }, [feature, map]);
+
+  return null;
 };
 
 const TchMap = () => {
   const [geoData, setGeoData] = useState(null);
   const [minTCH, setMinTCH] = useState(null);
   const [maxTCH, setMaxTCH] = useState(null);
-  const [loading, setLoading] = useState(true); // Loader state
-  const [selectedTCH, setSelectedTCH] = useState('TCHPRED_6Meses'); // Default filter
+  const [loading, setLoading] = useState(true);
+  const [selectedTCH, setSelectedTCH] = useState('TCHPRED_6Meses');
+  const [searchId, setSearchId] = useState('');
+  const mapRef = useRef(null);
+  const [downloadUrl, setDownloadUrl] = useState(null);
+  const [selectedFeature, setSelectedFeature] = useState(null); // Para almacenar el polígono encontrado
+
 
   useEffect(() => {
     const fetchGeoData = async () => {
       try {
-        const response = await fetch('/tch_data/outputv3.geojson');
+        const response = await fetch('/tch_data/outputv4.geojson');
         const data = await response.json();
 
         // Transformar las coordenadas de cada feature en el GeoJSON
         const transformedData = {
           ...data,
-          features: data.features.map(feature => ({
+          features: data.features.map((feature) => ({
             ...feature,
             geometry: {
               ...feature.geometry,
@@ -74,28 +105,75 @@ const TchMap = () => {
 
         // Obtener el valor mínimo y máximo del predictor seleccionado
         const tchValues = data.features
-          .map(feature => parseFloat(feature.properties[selectedTCH]))
-          .filter(value => !isNaN(value));
+          .map((feature) => parseFloat(feature.properties[selectedTCH]))
+          .filter((value) => !isNaN(value));
 
         setMinTCH(Math.min(...tchValues));
         setMaxTCH(Math.max(...tchValues));
 
         setGeoData(transformedData);
-        setLoading(false);  // Ocultar el loader cuando los datos se cargan
+        setLoading(false);
+
+        // Crear un Blob y URL para descargar el GeoJSON transformado, intercambiando latitud y longitud
+        const swappedData = {
+          ...transformedData,
+          features: transformedData.features.map((feature) => ({
+            ...feature,
+            geometry: {
+              ...feature.geometry,
+              coordinates: swapLatLngInCoordinates(feature.geometry.coordinates),
+            },
+          })),
+        };
+
+        const blob = new Blob([JSON.stringify(swappedData)], {
+          type: 'application/json',
+        });
+        const url = URL.createObjectURL(blob);
+        setDownloadUrl(url);
       } catch (error) {
         console.error('Error al cargar los datos GeoJSON:', error);
-        setLoading(false);  // Asegurarse de que el loader se oculte en caso de error
+        setLoading(false);
       }
     };
 
     fetchGeoData();
+
+    // Limpiar el URL anterior al cambiar el predictor
+    return () => {
+      if (downloadUrl) {
+        URL.revokeObjectURL(downloadUrl);
+      }
+    };
   }, [selectedTCH]); // Ejecuta nuevamente cuando el predictor cambia
 
+  // Función para intercambiar latitud y longitud en las coordenadas
+  const swapLatLngInCoordinates = (coordinates) => {
+    return coordinates.map((polygon) =>
+      polygon.map((point) => {
+        if (Array.isArray(point) && point.length === 2) {
+          return [point[1], point[0]]; // Intercambiar latitud y longitud
+        } else {
+          return point;
+        }
+      })
+    );
+  };
+
   const onEachFeature = (feature, layer) => {
-    if (feature.properties && feature.properties.id && feature.properties[selectedTCH]) {
+    if (
+      feature.properties &&
+      feature.properties.id &&
+      feature.properties[selectedTCH]
+    ) {
+      const tchValue = parseFloat(feature.properties[selectedTCH]);
+      const tchValueFormatted = isNaN(tchValue)
+        ? 'N/A'
+        : tchValue.toFixed(3);
+
       // Agregar tooltip con el id y el valor del predictor seleccionado
       layer.bindTooltip(
-        `ID: ${feature.properties.id}<br>${selectedTCH}: ${feature.properties[selectedTCH]}`,
+        `ID: ${feature.properties.id}<br>${selectedTCH}: ${tchValueFormatted}`,
         { permanent: false }
       );
 
@@ -106,7 +184,6 @@ const TchMap = () => {
           layer.setStyle({
             weight: 5,
             color: '#666',
-            fillColor: '#666',
             fillOpacity: 0.7,
           });
         },
@@ -129,8 +206,8 @@ const TchMap = () => {
     if (!isNaN(tchValue)) {
       return {
         weight: 2,
-        color: getColorFromTCH(tchValue, minTCH, maxTCH), // Color del borde
-        fillColor: getColorFromTCH(tchValue, minTCH, maxTCH), // Color del relleno
+        color: getColorFromTCH(tchValue, minTCH, maxTCH),
+        fillColor: getColorFromTCH(tchValue, minTCH, maxTCH),
         fillOpacity: 0.5,
       };
     }
@@ -140,58 +217,153 @@ const TchMap = () => {
       fillColor: '#ccc',
       fillOpacity: 0.5,
     };
+  }; 
+  
+  const handleSearch = () => {
+    if (!geoData || !searchId) {
+      console.error("Los datos no están listos o no hay un ID para buscar.");
+      return;
+    }
+
+    // Limpieza del ID de búsqueda y eliminación de espacios extra
+    const cleanSearchId = searchId.trim().toUpperCase();
+
+    // Buscar el polígono por su id
+    const feature = geoData.features.find(
+      (f) => f.properties.id && f.properties.id.trim().toUpperCase() === cleanSearchId
+    );
+
+    if (feature) {
+      setSelectedFeature(feature); // Actualizamos el polígono seleccionado
+    } else {
+      alert('No se encontró un polígono con el ID proporcionado:', cleanSearchId);
+    }
   };
 
   return (
-    <>
-      <div style={{ marginBottom: '10px' }}>
-        <label htmlFor="tchFilter">Filtrar por predicción:</label>
-        <select
-          id="tchFilter"
-          value={selectedTCH}
-          onChange={(e) => {
-            setLoading(true); // Mostrar loader al cambiar el filtro
-            setSelectedTCH(e.target.value);
-          }}
-        >
-          <option value="TCHPRED_2Meses">TCH Predicción a 2 Meses</option>
-          <option value="TCHPRED_4Meses">TCH Predicción a 4 Meses</option>
-          <option value="TCHPRED_6Meses">TCH Predicción a 6 Meses</option>
-          <option value="TCHPRED_8Meses">TCH Predicción a 8 Meses</option>
-        </select>
-      </div>
+    <Row className="my-5 w-100">
+      <Col
+        className='sidebar'
+        sm={11}
+        xl={3}
+      >
+        {/* Filtro al lado izquierdo */}
+        <h5>Filtrar por predicción</h5>
+        <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <li>
+            <label>
+              <input
+                type="radio"
+                value="TCHPRED_2Meses"
+                checked={selectedTCH === 'TCHPRED_2Meses'}
+                onChange={() => {
+                  setLoading(true);
+                  setSelectedTCH('TCHPRED_2Meses');
+                }}
+              />{' '}
+              TCH Predicción a 2 Meses
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                type="radio"
+                value="TCHPRED_4Meses"
+                checked={selectedTCH === 'TCHPRED_4Meses'}
+                onChange={() => {
+                  setLoading(true);
+                  setSelectedTCH('TCHPRED_4Meses');
+                }}
+              />{' '}
+              TCH Predicción a 4 Meses
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                type="radio"
+                value="TCHPRED_6Meses"
+                checked={selectedTCH === 'TCHPRED_6Meses'}
+                onChange={() => {
+                  setLoading(true);
+                  setSelectedTCH('TCHPRED_6Meses');
+                }}
+              />{' '}
+              TCH Predicción a 6 Meses
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                type="radio"
+                value="TCHPRED_8Meses"
+                checked={selectedTCH === 'TCHPRED_8Meses'}
+                onChange={() => {
+                  setLoading(true);
+                  setSelectedTCH('TCHPRED_8Meses');
+                }}
+              />{' '}
+              TCH Predicción a 8 Meses
+            </label>
+          </li>
+        </ul>
 
-      {loading ? (
-        // Mostrar loader mientras los datos están cargando
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px' }}>
-          <Oval
-            height={80}
-            width={80}
-            color="#fe7018"
-            ariaLabel="loading"
+        {/* Buscar por ID */}
+        <h5 className='mt-5'>Buscar por ID</h5>
+        <div className='d-flex'>
+          <input
+            type="text"
+            value={searchId}
+            onChange={(e) => setSearchId(e.target.value)}
+            placeholder="Ingrese el ID"
+            className='inputsidebar'
           />
+          <button style={{ width: '30%'}} className='button' onClick={handleSearch}>Buscar</button>
         </div>
-      ) : (
-        // Mostrar el mapa una vez que los datos están cargados
-        <MapContainer
-          center={[14.3050000, -90.7850000]} // Centrado en Guatemala
-          zoom={9}
-          style={{ height: '500px', width: '100%' }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {geoData && minTCH !== null && maxTCH !== null && (
-            <GeoJSON
-              data={geoData}
-              style={style} // Asignar el estilo dinámico
-              onEachFeature={onEachFeature} // Manejar eventos como hover
+
+        {/* Botón para descargar el GeoJSON transformado */}
+        <h5 className='mt-5'>Descargar GeoJSON</h5>
+        {downloadUrl && (
+          <a href={downloadUrl} download="transformed_data.geojson">
+            <button className='button'>Descargar GeoJSON</button>
+          </a>
+        )}
+      </Col>
+
+      <Col sm={11} xl={9}>
+        {loading ? (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '500px',
+            }}
+          >
+            <Oval height={80} width={80} color="#fe7018" ariaLabel="loading" />
+          </div>
+        ) : (
+          <MapContainer
+            center={[14.305, -90.785]}
+            zoom={9}
+            style={{ height: '500px', width: '100%' }}
+          >
+            {selectedFeature && <CenterPolygon feature={selectedFeature} />}
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-          )}
-        </MapContainer>
-      )}
-    </>
+            {geoData && minTCH !== null && maxTCH !== null && (
+              <GeoJSON
+                data={geoData}
+                style={style}
+                onEachFeature={onEachFeature}
+              />
+            )}
+          </MapContainer>
+        )}
+      </Col>
+    </Row>
   );
 };
 

@@ -1,0 +1,11 @@
+.sidebar{
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+}
+
+.inputsidebar{
+    width: 70%; 
+    background-color: #fff; 
+    color: #000;
+}

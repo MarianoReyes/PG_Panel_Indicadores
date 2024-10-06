@@ -25,7 +25,7 @@ const PrediccionTchPage = () => {
           </Col>
         </Row>
         <Row className="my-5 justify-content-center">
-          <Col className="centered" sm={12} xl={8}>
+          <Col className="centered" sm={11} xl={10}>
             <TchMap />
           </Col>
         </Row>

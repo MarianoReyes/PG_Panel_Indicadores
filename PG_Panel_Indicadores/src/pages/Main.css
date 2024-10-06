@@ -42,7 +42,7 @@ p, a{
 }
 
 .button:hover{
-    background-color: #000;
+    background-color: #fff;
     color: #fe7018;
     border: 1px solid #fe7018;
 }
