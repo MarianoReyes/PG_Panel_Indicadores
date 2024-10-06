@@ -32,22 +32,27 @@ const convertUTMToLatLng = (coordinates) => {
   );
 };
 
-// Función para obtener un color basado en un valor de TCHPRED
+// Función para obtener un color basado en un valor de TCHPRED usando tonos de naranja
 const getColorFromTCH = (value, minTCH, maxTCH) => {
   if (minTCH === maxTCH) {
-    return 'rgb(0, 255, 0)';
+    return '#ffe5b4'; // Naranja claro por defecto
   }
 
   if (isNaN(value)) {
-    return 'rgb(200, 200, 200)';
+    return 'rgb(200, 200, 200)'; // Gris para valores no numéricos
   }
 
   const ratio = (value - minTCH) / (maxTCH - minTCH);
 
-  const red = Math.floor(255 * (1 - ratio));
-  const green = Math.floor(255 * ratio);
+  // Interpolación entre naranja claro y naranja amarronado
+  const colorLight = { r: 255, g: 229, b: 180 }; // #ffe5b4 (naranja claro)
+  const colorDark = { r: 204, g: 85, b: 0 };     // #cc5500 (naranja amarronado)
 
-  return `rgb(${red}, ${green}, 0)`;
+  const red = Math.floor(colorLight.r * (1 - ratio) + colorDark.r * ratio);
+  const green = Math.floor(colorLight.g * (1 - ratio) + colorDark.g * ratio);
+  const blue = Math.floor(colorLight.b * (1 - ratio) + colorDark.b * ratio);
+
+  return `rgb(${red}, ${green}, ${blue})`;
 };
 
 // Componente para centrar el poligono dependiendo de la busqueda
