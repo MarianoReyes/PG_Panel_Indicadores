@@ -18,9 +18,13 @@ const getColorFromTCH = (value, minTCH, maxTCH) => {
 
 // Componente de la Barra de Escala de Color
 const ColorScaleBar = ({ minTCH, maxTCH, steps = 20 }) => {
+  const minTCHn = Number(minTCH);
+  const maxTCHn = Number(maxTCH);
+  const minTCHf = minTCHn.toFixed(3);
+  const maxTCHf = maxTCHn.toFixed(3);
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div style={{ marginRight: '10px', fontSize: '14px' }}>Min TCH</div>
+      <div style={{ marginRight: '10px', fontSize: '14px' }}>Min_TCH ({minTCHf})</div>
       <div style={{ display: 'flex', height: '20px', width: '100%' }}>
         {Array.from({ length: steps + 1 }).map((_, i) => {
           const value = minTCH + ((maxTCH - minTCH) * i) / steps;
@@ -38,7 +42,7 @@ const ColorScaleBar = ({ minTCH, maxTCH, steps = 20 }) => {
           );
         })}
       </div>
-      <div style={{ marginLeft: '10px', fontSize: '14px' }}>Max TCH</div>
+      <div style={{ marginLeft: '10px', fontSize: '14px' }}>Max_TCH ({maxTCHf})</div>
     </div>
   );
 };
