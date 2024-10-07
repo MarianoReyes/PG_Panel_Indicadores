@@ -39,10 +39,6 @@ const DeteccionEnfermedadesPage = () => {
 
   const steps = [
     {
-      target: '.model-description',
-      content: 'Entendimiento del Modelo.',
-    },
-    {
       target: '.upload-image',
       content: 'Aquí puedes subir la imagen de la caña de azúcar que deseas analizar.',
     },
