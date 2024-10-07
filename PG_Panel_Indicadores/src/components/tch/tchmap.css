@@ -9,3 +9,24 @@
     background-color: #fff; 
     color: #000;
 }
+
+.color-scale {
+    display: flex;
+    align-items: center;
+}
+
+.color-scale-label {
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.color-scale-bar {
+    display: flex;
+    height: 20px;
+    width: 100%;
+}
+
+.color-step {
+    flex: 1;
+    height: 100%;
+}

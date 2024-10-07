@@ -7,6 +7,7 @@ import { Oval } from 'react-loader-spinner'; // Loader
 import L from 'leaflet';
 import './tchmap.css';
 import { useMap } from 'react-leaflet';
+import ColorScaleBar from './colorScale'
 
 proj4.defs('EPSG:32615', '+proj=utm +zone=15 +datum=WGS84 +units=m +no_defs');
 
@@ -45,8 +46,8 @@ const getColorFromTCH = (value, minTCH, maxTCH) => {
   const ratio = (value - minTCH) / (maxTCH - minTCH);
 
   // Interpolación entre naranja claro y naranja amarronado
-  const colorDark = { r: 255, g: 229, b: 180 }; // #ffe5b4 (naranja claro)
-  const colorLight = { r: 204, g: 85, b: 0 };     // #cc5500 (naranja amarronado)
+  const colorDark = { r: 255, g: 229, b: 180 };   // #cc5500 (naranja amarronado)
+  const colorLight = { r: 204, g: 85, b: 0 }; // #ffe5b4 (naranja claro)  
 
   const red = Math.floor(colorLight.r * (1 - ratio) + colorDark.r * ratio);
   const green = Math.floor(colorLight.g * (1 - ratio) + colorDark.g * ratio);
@@ -334,6 +335,10 @@ const TchMap = () => {
             <button className='button'>Descargar GeoJSON</button>
           </a>
         )}
+
+        <div className='mt-4'></div>
+        <ColorScaleBar minTCH={minTCH} maxTCH={maxTCH} steps={20} />
+
       </Col>
 
       <Col sm={11} xl={9}>
