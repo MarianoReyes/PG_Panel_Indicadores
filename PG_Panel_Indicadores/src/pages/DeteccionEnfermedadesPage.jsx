@@ -77,7 +77,7 @@ const DeteccionEnfermedadesPage = () => {
             primaryColor: '#fe7018',  
             textColor: '#333',  
             arrowColor: '#fe7018',  
-            spotlightShadow: '0 0 15px rgba(254, 112, 24, 0.4)',  
+            spotlightShadow: '0 0 15px rgba(254, 112, 24, 0.4)'
           },
           buttonClose: {
             color: '#fe7018',  
@@ -100,12 +100,22 @@ const DeteccionEnfermedadesPage = () => {
               análisis de imágenes, permitiendo diagnóstico temprano y manejo eficiente de cultivos.
             </p>
             <Row className='my-5'>
-              <Col sm={12} xl={6}>
-                <input type="file" className="upload-image" onChange={loadImage} />
+              <Col sm={12} xl={4}>
+                <label htmlFor="upload" className='upload-image button-page-2'>
+                  Cargar imagen
+                  <input
+                    id="upload"
+                    type="file"
+                    onChange={loadImage}
+                    style={{ display: 'none' }}
+                  />
+                </label>
+              </Col>
+              <Col sm={12} xl={4} >
                 <Button className="button-page" onClick={handlePredict}>Detectar Enfermedad</Button>
               </Col>
-              <Col sm={12} xl={6} >
-                {image && <img src={image} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />}
+              <Col sm={12} xl={4} >
+                {image && <img src={image} alt="Uploaded" style={{ maxWidth: '100%', height: '400px' }} />}
               </Col>  
             </Row>
             <Row className='my-5'>   
