@@ -246,7 +246,7 @@ const TchMap = () => {
   };
 
   return (
-    <Row className="my-5 w-100">
+    <Row className="mb-5 w-100">
       <Col
         className='sidebar'
         sm={11}
