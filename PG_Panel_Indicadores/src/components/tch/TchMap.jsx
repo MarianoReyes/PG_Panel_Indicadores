@@ -45,8 +45,8 @@ const getColorFromTCH = (value, minTCH, maxTCH) => {
   const ratio = (value - minTCH) / (maxTCH - minTCH);
 
   // Interpolación entre naranja claro y naranja amarronado
-  const colorLight = { r: 255, g: 229, b: 180 }; // #ffe5b4 (naranja claro)
-  const colorDark = { r: 204, g: 85, b: 0 };     // #cc5500 (naranja amarronado)
+  const colorDark = { r: 255, g: 229, b: 180 }; // #ffe5b4 (naranja claro)
+  const colorLight = { r: 204, g: 85, b: 0 };     // #cc5500 (naranja amarronado)
 
   const red = Math.floor(colorLight.r * (1 - ratio) + colorDark.r * ratio);
   const green = Math.floor(colorLight.g * (1 - ratio) + colorDark.g * ratio);
