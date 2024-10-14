@@ -33,10 +33,38 @@ const DeteccionEnfermedadesPage = () => {
   };
 
   const handlePredict = async () => {
-    setPrediction("Hola")
-    return 1;
+    if (!image) {
+      alert("Por favor, sube una imagen antes de detectar enfermedades.");
+      return;
+    }
+  
+    try {
+      // Convertir base64 a blob para enviar como archivo jpg
+      const byteString = atob(image.split(',')[1]);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+  
+      // Crear un FormData y agregar el archivo con clave 'file'
+      const formData = new FormData();
+      formData.append('file', blob, 'planta.jpg'); // cambiando la clave a 'file'
+  
+      const response = await fetch("https://api.agrointelligence.online/models/eagawesome/predict", {
+        method: "POST",
+        body: formData
+      });
+  
+      const data = await response.json();
+      setPrediction(data.prediction);
+    } catch (error) {
+      console.error("Error al realizar la predicción:", error);
+    }
   };
-
+  
+  
   const steps = [
     {
       target: '.upload-image',
