@@ -32,6 +32,14 @@ const DeteccionEnfermedadesPage = () => {
     reader.readAsDataURL(file);
   };
 
+  const enfermedadDescriptions = {
+    "Chinche salivosa": "La chinche salivosa es un insecto que afecta severamente a la caña de azúcar al alimentarse de su savia...",
+    "Roya naranja": "La roya naranja es una enfermedad fúngica causada por el hongo Puccinia kuehnii, que provoca manchas anaranjadas...",
+    "Roya purpura": "La roya púrpura, causada por el hongo Puccinia melanocephala, produce manchas de color púrpura o marrón...",
+    "Clorosis": "La clorosis es un trastorno fisiológico que se presenta cuando la caña de azúcar no recibe suficiente hierro..."
+  };
+  
+
   const handlePredict = async () => {
     if (!image) {
       alert("Por favor, sube una imagen antes de detectar enfermedades.");
@@ -149,6 +157,7 @@ const DeteccionEnfermedadesPage = () => {
             <Row className='my-5'>   
               <Col sm={12} xl={12}>
                 {prediction && <p>Predicción: {JSON.stringify(prediction)}</p>}
+                <p>{enfermedadDescriptions[prediction]}</p>
               </Col>
             </Row>
           </Col>

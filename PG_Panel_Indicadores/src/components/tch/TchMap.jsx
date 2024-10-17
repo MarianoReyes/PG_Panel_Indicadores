@@ -94,7 +94,7 @@ const TchMap = () => {
   useEffect(() => {
     const fetchGeoData = async () => {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/MarianoReyes/GeoData/main/outputv5.geojson');
+        const response = await fetch('https://raw.githubusercontent.com/Jack200133/tchapi/master/data/outputgisv6.geojson');
         const data = await response.json();
 
         // Transformar las coordenadas de cada feature en el GeoJSON

@@ -96,9 +96,21 @@
     color: #000!important;
 }
 
+.redes a:last-child{
+    padding: 10px 15px;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
 .redes-sticky a{
     color: #444!important;
     transition: 0.5s all ease;
+}
+
+.redes-sticky a:last-child{
+    padding: 10px 15px;
+    border: 1px solid #000;
+    border-radius: 50%;
 }
 
 .redes-sticky a:hover{
