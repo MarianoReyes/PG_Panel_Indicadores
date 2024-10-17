@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import  { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import { Row, Col, Modal, Button } from 'react-bootstrap';
 import 'leaflet/dist/leaflet.css';
@@ -10,21 +10,21 @@ import ColorScaleBar from './colorScale';
 
 proj4.defs('EPSG:32615', '+proj=utm +zone=15 +datum=WGS84 +units=m +no_defs');
 
-const convertUTMToLatLng = (coordinates) => {
-  return coordinates.map((polygon) =>
-    polygon.map((point) => {
-      if (Array.isArray(point) && point.length === 2 && isFinite(point[0]) && isFinite(point[1])) {
-        try {
-          return proj4('EPSG:32615', 'EPSG:4326', point);
-        } catch (error) {
-          return point;
-        }
-      } else {
-        return point;
-      }
-    })
-  );
-};
+// const convertUTMToLatLng = (coordinates) => {
+//   return coordinates.map((polygon) =>
+//     polygon.map((point) => {
+//       if (Array.isArray(point) && point.length === 2 && isFinite(point[0]) && isFinite(point[1])) {
+//         try {
+//           return proj4('EPSG:32615', 'EPSG:4326', point);
+//         } catch (error) {
+//           return point;
+//         }
+//       } else {
+//         return point;
+//       }
+//     })
+//   );
+// };
 
 const getColorFromTCH = (value, minTCH, maxTCH) => {
   if (minTCH === maxTCH) {

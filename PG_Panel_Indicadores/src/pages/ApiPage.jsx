@@ -1,4 +1,4 @@
-import { Container, Row, Col, Accordion } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import './ApiPage.css';
 

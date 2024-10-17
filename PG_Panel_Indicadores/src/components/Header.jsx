@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Header = ({ isAuthenticated, onLogin, onLogout }) => {
+const Header = ({ isAuthenticated, onLogout }) => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 

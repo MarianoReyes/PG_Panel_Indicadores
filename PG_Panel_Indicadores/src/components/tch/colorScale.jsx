@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Función para obtener el color basado en el valor de TCH
 const getColorFromTCH = (value, minTCH, maxTCH) => {
   if (minTCH === maxTCH) return '#ffe5b4'; // Naranja claro por defecto
