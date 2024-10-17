@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 import './LoginPage.css';
 
 function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   // Redirección automática si el usuario ya está autenticado
@@ -17,16 +20,42 @@ function LoginPage({ onLogin }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Simulación de autenticación exitosa
-    const response = { ok: true, verified: true }; // Simula la respuesta de autenticación
+    // Datos de inicio de sesión
+    const loginData = {
+      email: username,
+      password: password
+    };
 
-    if (response.ok && response.verified) {
-      onLogin();  // Actualiza el estado de autenticación en App y guarda en localStorage
-      navigate('/'); // Redirige a la página principal u otra ruta deseada
-    } else {
-      alert('Credenciales incorrectas. Inténtalo de nuevo.');
+    try {
+      const response = await fetch('https://api.agrointelligence.online/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('isAuthenticated', 'true');
+
+        onLogin(); // Actualiza el estado de autenticación en App
+        navigate('/'); // Redirige a la página principal
+      } else {
+        // Muestra el modal de error si las credenciales son incorrectas
+        setErrorMessage('Credenciales incorrectas. Inténtalo de nuevo.');
+        setShowErrorModal(true);
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      setErrorMessage('Hubo un error al intentar iniciar sesión. Por favor, intenta nuevamente.');
+      setShowErrorModal(true);
     }
   };
+
+  const handleCloseErrorModal = () => setShowErrorModal(false);
 
   return (
     <div className="login-container">
@@ -34,7 +63,7 @@ function LoginPage({ onLogin }) {
         <h2>Iniciar Sesión</h2>
         <form onSubmit={handleLogin}>
           <div>
-            <label>Usuario:</label>
+            <label>Correo:</label>
             <input
               type="text"
               value={username}
@@ -54,6 +83,19 @@ function LoginPage({ onLogin }) {
           <button type="submit">Ingresar</button>
         </form>
       </div>
+
+      {/* Modal de Error */}
+      <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error de Inicio de Sesión</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{errorMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseErrorModal}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

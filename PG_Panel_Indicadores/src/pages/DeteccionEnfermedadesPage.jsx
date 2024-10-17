@@ -33,10 +33,11 @@ const DeteccionEnfermedadesPage = () => {
   };
 
   const enfermedadDescriptions = {
-    "Chinche salivosa": "La chinche salivosa es un insecto que afecta severamente a la caña de azúcar al alimentarse de su savia...",
-    "Roya naranja": "La roya naranja es una enfermedad fúngica causada por el hongo Puccinia kuehnii, que provoca manchas anaranjadas...",
-    "Roya purpura": "La roya púrpura, causada por el hongo Puccinia melanocephala, produce manchas de color púrpura o marrón...",
-    "Clorosis": "La clorosis es un trastorno fisiológico que se presenta cuando la caña de azúcar no recibe suficiente hierro..."
+    "Chinche salivosa": "La chinche salivosa es un insecto que afecta severamente a la caña de azúcar al alimentarse de su savia. Estos insectos se agrupan en grandes cantidades y al succionar los fluidos de la planta, reducen su vigor, lo que puede afectar la calidad y el rendimiento del cultivo. Además, las chinches liberan una sustancia espumosa que puede favorecer el crecimiento de hongos, empeorando la salud de la planta. Para su manejo, es recomendable realizar inspecciones regulares del cultivo y aplicar controles biológicos con depredadores naturales, así como el uso de insecticidas específicos cuando la infestación es grave.",
+    "Roya naranja": "La roya naranja es una enfermedad fúngica causada por el hongo Puccinia kuehnii, que provoca manchas anaranjadas en las hojas de la caña de azúcar. Estas manchas reducen la capacidad fotosintética de la planta, lo que disminuye su crecimiento y producción. La enfermedad se propaga fácilmente en condiciones de alta humedad y temperaturas cálidas. Para controlarla, es importante eliminar las plantas afectadas y aplicar fungicidas adecuados. Además, el uso de variedades de caña de azúcar resistentes y la rotación de cultivos pueden reducir la incidencia de esta enfermedad..",
+    "Roya purpura": "La roya púrpura, causada por el hongo Puccinia melanocephala, produce manchas de color púrpura o marrón en las hojas de la caña de azúcar, afectando también la capacidad fotosintética de la planta. Esta enfermedad es más prevalente en condiciones húmedas y se propaga rápidamente a través de las esporas transportadas por el viento. Para su manejo, se recomienda el uso de fungicidas y la siembra de variedades resistentes. Además, es crucial evitar el riego excesivo y mantener una buena circulación de aire entre las plantas para reducir la humedad.",
+    "Clorosis": "La clorosis es un trastorno fisiológico que se presenta cuando la caña de azúcar no recibe suficiente hierro o nutrientes esenciales, lo que causa que las hojas se vuelvan amarillentas debido a una deficiencia en clorofila. Esto puede ser resultado de suelos pobres o condiciones de drenaje inadecuadas. Para tratar la clorosis, es fundamental mejorar las condiciones del suelo con fertilizantes ricos en micronutrientes y asegurar un riego adecuado. También, realizar análisis de suelo periódicos ayuda a identificar las deficiencias específicas y a corregirlas de manera oportuna.",
+    "Hoja Sana": "¡Felicidades! Tu hoja está sana, no debemos actuar."
   };
   
 
