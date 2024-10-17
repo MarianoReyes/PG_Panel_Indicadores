@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
-import ContactPage from './pages/ContactPage';
 import ApiPage from './pages/ApiPage';
 import DeteccionEnfermedadesPage from './pages/DeteccionEnfermedadesPage';
 import PrediccionTchPage from './pages/PrediccionTchPage';
@@ -33,7 +32,6 @@ function App() {
       <Layout isAuthenticated={isAuthenticated} onLogin={handleLogin} onLogout={handleLogout}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
           <Route
             path="/api"

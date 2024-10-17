@@ -82,7 +82,6 @@ const Header = ({ isAuthenticated, onLogin, onLogout }) => {
                       <NavDropdown.Item href="/prediccion_tch">Predicción TCH</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="/api">API</Nav.Link>
-                    <Nav.Link href="/contact">Contacto</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Col>
