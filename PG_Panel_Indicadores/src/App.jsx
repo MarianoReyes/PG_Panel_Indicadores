@@ -19,7 +19,6 @@ function App() {
 
   const handleLogin = () => {
     setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true');
   };
 
   const handleLogout = () => {
@@ -29,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      <Layout isAuthenticated={isAuthenticated} onLogin={handleLogin} onLogout={handleLogout}>
+      <Layout isAuthenticated={isAuthenticated} onLogout={handleLogout}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
