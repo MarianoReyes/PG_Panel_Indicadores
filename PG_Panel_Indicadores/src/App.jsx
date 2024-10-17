@@ -21,13 +21,11 @@ function App() {
   const handleLogin = () => {
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true');
-    console.log("Inició sesión, isAuthenticated:", true);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('isAuthenticated');
-    console.log("Cerró sesión, isAuthenticated:", false);
   };
 
   return (
