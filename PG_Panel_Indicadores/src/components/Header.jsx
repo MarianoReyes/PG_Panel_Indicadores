@@ -14,16 +14,16 @@ const Header = ({ isAuthenticated, onLogin, onLogout }) => {
   };
 
   const handleLogout = () => {
-    setShowLogoutModal(true); // Muestra el modal de confirmación
+    setShowLogoutModal(true); 
   };
 
   const confirmLogout = () => {
-    setShowLogoutModal(false); // Oculta el modal
-    onLogout(); // Llama a la función de cierre de sesión
+    setShowLogoutModal(false);    
+    onLogout();   
   };
 
   const cancelLogout = () => {
-    setShowLogoutModal(false); // Solo oculta el modal sin cerrar sesión
+    setShowLogoutModal(false); 
   };
 
   useEffect(() => {
