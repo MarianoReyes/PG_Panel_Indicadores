@@ -6,6 +6,7 @@ import './DeteccionEnfermedadesPage.css';
 
 const DeteccionEnfermedadesNolayoutPage = () => {
   const [prediction, setPrediction] = useState(null);
+  const [trust, setTrust] = useState(null);
   const [image, setImage] = useState(null);
   const [runTour, setRunTour] = useState(false);
   const [tourKey, setTourKey] = useState(0);
@@ -83,6 +84,7 @@ const DeteccionEnfermedadesNolayoutPage = () => {
       });
   
       const data = await response.json();
+      setTrust(parseFloat((data.confidence * 100).toFixed(2)));
       setPrediction(data.prediction);
     } catch (error) {
       console.error("Error al realizar la predicción:", error);
@@ -119,17 +121,27 @@ const DeteccionEnfermedadesNolayoutPage = () => {
             </Row>
             <Row className='my-5'>   
               <Col sm={12} xl={4}>
-                {prediction && <div><h3>Predicción: </h3><br></br><h2>{JSON.stringify(prediction)}</h2></div>}
+                {prediction && trust >= 75 && <div><h3>Predicción: </h3><br></br><h2>{JSON.stringify(prediction)}</h2><br></br>
+                <br></br></div>}
+                
+                {trust && <div><h3>Confianza: </h3><br></br><h2>{JSON.stringify(trust)}%</h2> <p>Confianza con la que se realiza la predicción en porcentaje.</p></div>}
               </Col>
 
               <Col sm={12} xl={8}>
-                {prediction &&
+                {prediction && trust >= 75 && 
                 <div>
                   <h3>Descripción de enfermedad</h3>
                   <p className='text-justify'>{enfermedadDescriptions[prediction]}</p>
                   <br></br>
                   <h3>Consejos para mitigarla</h3>
                   <p className='text-justify'>{enfermedadConsejos[prediction]}</p>
+                </div>
+                }
+
+                {prediction && trust < 75 && 
+                <div>
+                  <h3>¡¡¡Precaución!!!</h3>
+                  <p className='text-justify'>La imágen ingresada probablemente no es una planta. Ingrese una imagen nueva.</p>
                 </div>
                 }
               </Col>
