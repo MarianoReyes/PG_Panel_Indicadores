@@ -54,3 +54,10 @@
     background-color: rgb(234, 102, 22);
 }
   
+
+/* Responsive styles */
+@media (min-width: 2300px) {
+    .login-container {
+        height: 81vh;
+    }
+}
