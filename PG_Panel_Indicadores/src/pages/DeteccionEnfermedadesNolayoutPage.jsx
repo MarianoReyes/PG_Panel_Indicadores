@@ -4,7 +4,7 @@ import { Container, Row, Col, Button,  Modal } from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import './DeteccionEnfermedadesPage.css';
 
-const DeteccionEnfermedadesPage = () => {
+const DeteccionEnfermedadesNolayoutPage = () => {
   const [prediction, setPrediction] = useState(null);
   const [image, setImage] = useState(null);
   const [runTour, setRunTour] = useState(false);
@@ -18,14 +18,6 @@ const DeteccionEnfermedadesPage = () => {
     setRunTour(true);
     setTourKey(prevKey => prevKey + 1);
   }, []);
-
-  const slides = [
-    {
-      image: '/slider2.webp',
-      title: 'Modelo para la detección de enfermedades en la caña',
-      description: 'Con datos recogidos en campo, mostramos las enfermedades que afectan'
-    }
-  ];
 
   const loadImage = (e) => {
     const file = e.target.files[0];
@@ -84,63 +76,9 @@ const DeteccionEnfermedadesPage = () => {
       console.error("Error al realizar la predicción:", error);
     }
   };
-  
-  
-  const steps = [
-    {
-      target: '.upload-image',
-      content: 'Aquí puedes subir la imagen de la caña de azúcar que deseas analizar.',
-    },
-    {
-      target: '.button-page',
-      content: 'Haz clic en este botón para comenzar la detección de enfermedades.',
-    }
-  ];
-
-  const handleJoyrideCallback = (data) => {
-    const { type, status } = data;
-
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      setRunTour(false);
-    }
-
-    if (type === EVENTS.STEP_AFTER || type === EVENTS.TARGET_NOT_FOUND) {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-  };
 
   return (
     <div>
-      <Joyride
-        steps={steps}
-        run={runTour}
-        continuous={true}
-        showSkipButton={true}
-        showProgress={true}  
-        scrollToFirstStep={true}
-        key={tourKey}
-        callback={handleJoyrideCallback}
-        styles={{
-          options: {
-            zIndex: 10000,
-            primaryColor: '#fe7018',  
-            textColor: '#333',  
-            arrowColor: '#fe7018',  
-            spotlightShadow: '0 0 15px rgba(254, 112, 24, 0.4)'
-          },
-          buttonClose: {
-            color: '#fe7018',  
-          },
-          buttonNext: {
-            backgroundColor: '#fe7018',  
-          },
-          buttonBack: {
-            marginRight: 10,
-            color: '#fe7018',  
-          }
-        }}
-      />
-      <Slider slides={slides} />
       <Container>
         <Row className="my-5 justify-content-center">
           <Col sm={12} xl={8}>
@@ -204,4 +142,4 @@ const DeteccionEnfermedadesPage = () => {
   );
 };
 
-export default DeteccionEnfermedadesPage;
+export default DeteccionEnfermedadesNolayoutPage;

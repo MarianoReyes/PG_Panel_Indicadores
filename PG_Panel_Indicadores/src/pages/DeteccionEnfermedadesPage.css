@@ -37,3 +37,7 @@
 .react-joyride__beacon{
   margin-top: -60px!important;
 }
+
+.text-justify{
+  text-align: justify;
+}

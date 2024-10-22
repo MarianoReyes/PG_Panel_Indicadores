@@ -4,11 +4,11 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import ApiPage from './pages/ApiPage';
 import DeteccionEnfermedadesPage from './pages/DeteccionEnfermedadesPage';
+import DeteccionEnfermedadesNolayoutPage from './pages/DeteccionEnfermedadesNolayoutPage';
 import PrediccionTchPage from './pages/PrediccionTchPage';
 import LoginPage from './pages/LoginPage';
 
 function App() {
-  // Inicializa el estado directamente desde localStorage
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
@@ -28,8 +28,21 @@ function App() {
 
   return (
     <Router>
-      <Layout isAuthenticated={isAuthenticated} onLogout={handleLogout}>
-        <Routes>
+      <Routes>
+        {/* Ruta sin Layout */}
+        <Route
+          path="/deteccion_enfermedades_nolayout"
+          element={
+            isAuthenticated ? (
+              <DeteccionEnfermedadesNolayoutPage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Rutas con Layout */}
+        <Route element={<Layout isAuthenticated={isAuthenticated} onLogout={handleLogout} />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
           <Route
@@ -50,8 +63,8 @@ function App() {
               isAuthenticated ? <PrediccionTchPage /> : <Navigate to="/login" replace />
             }
           />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </Router>
   );
 }
