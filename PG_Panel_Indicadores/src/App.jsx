@@ -32,13 +32,7 @@ function App() {
         {/* Ruta sin Layout */}
         <Route
           path="/deteccion_enfermedades_nolayout"
-          element={
-            isAuthenticated ? (
-              <DeteccionEnfermedadesNolayoutPage />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
+          element={<DeteccionEnfermedadesNolayoutPage />}
         />
 
         {/* Rutas con Layout */}
