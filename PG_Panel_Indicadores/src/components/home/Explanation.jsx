@@ -10,6 +10,8 @@ const Explanation = () => {
                 <p>
                 Se implementan modelos de IA, visión por computadora, 
                 predicción y una API para recolección de datos. 
+                </p>
+                <p>
                 Explora aplicaciones prácticas de inteligencia artificial y análisis de datos.
                 </p>
             </Col>

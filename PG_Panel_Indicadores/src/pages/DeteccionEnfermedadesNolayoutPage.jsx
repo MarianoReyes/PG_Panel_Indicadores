@@ -14,6 +14,16 @@ const DeteccionEnfermedadesNolayoutPage = () => {
 
   const handleCloseErrorModal = () => setShowErrorModal(false);
 
+  localStorage.setItem('isAuthenticated', 'true');
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
+
+  useEffect(() => {
+    console.log("Estado de autenticación al cargar App:", isAuthenticated);
+  }, [isAuthenticated]);
+
   useEffect(() => {
     setRunTour(true);
     setTourKey(prevKey => prevKey + 1);
@@ -45,6 +55,8 @@ const DeteccionEnfermedadesNolayoutPage = () => {
   };
 
   const handlePredict = async () => {
+    setIsAuthenticated(true);
+    
     if (!image) {
       setErrorMessage("Por favor, sube una imagen antes de detectar enfermedades.");
       setShowErrorModal(true);
