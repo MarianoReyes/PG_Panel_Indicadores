@@ -21,7 +21,7 @@ vi.mock('react-leaflet', async () => {
   };
 });
 
-// Mock de leaflet (si es necesario)
+// Mock de leaflet 
 vi.mock('leaflet', () => {
   return {
     __esModule: true,
@@ -42,7 +42,7 @@ vi.mock('leaflet', () => {
   };
 });
 
-// Tus pruebas
+// pruebas
 describe('TchMap Component', () => {
   test('renderiza el mapa', () => {
     render(<TchMap />);
@@ -65,7 +65,7 @@ describe('TchMap Component', () => {
     const input = screen.getByPlaceholderText(/Ingrese el ID/i);
     fireEvent.change(input, { target: { value: '999' } });
 
-    // Utiliza getByRole para seleccionar el botón
+    // seleccionamos boton
     const searchButton = screen.getByRole('button', { name: /Buscar/i });
     fireEvent.click(searchButton);
 

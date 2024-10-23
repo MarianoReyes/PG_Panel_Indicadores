@@ -7,8 +7,6 @@ const DeteccionEnfermedadesNolayoutPage = () => {
   const [prediction, setPrediction] = useState(null);
   const [trust, setTrust] = useState(null);
   const [image, setImage] = useState(null);
-  const [runTour, setRunTour] = useState(false);
-  const [tourKey, setTourKey] = useState(0);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,11 +22,6 @@ const DeteccionEnfermedadesNolayoutPage = () => {
   useEffect(() => {
     console.log("Estado de autenticación al cargar App:", isAuthenticated);
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    setRunTour(true);
-    setTourKey(prevKey => prevKey + 1);
-  }, []);
 
   const loadImage = (e) => {
     const file = e.target.files[0];

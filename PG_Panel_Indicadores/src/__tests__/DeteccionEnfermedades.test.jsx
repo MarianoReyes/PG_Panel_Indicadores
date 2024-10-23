@@ -2,7 +2,6 @@
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import DeteccionEnfermedadesPage from '../pages/DeteccionEnfermedadesPage';
 import { server } from '../mocks/server';
-import { rest } from 'msw';
 import '@testing-library/jest-dom';
 
 // Mock de FileReader y variable de entorno
