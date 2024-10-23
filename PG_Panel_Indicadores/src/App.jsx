@@ -14,7 +14,6 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("Estado de autenticación al cargar App:", isAuthenticated);
   }, [isAuthenticated]);
 
   const handleLogin = () => {

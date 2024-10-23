@@ -27,7 +27,7 @@ function LoginPage({ onLogin }) {
     };
 
     try {
-      const response = await fetch('https://api.agrointelligence.online/users/login', {
+      const response = await fetch(import.meta.env.VITE_URL_LOGIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

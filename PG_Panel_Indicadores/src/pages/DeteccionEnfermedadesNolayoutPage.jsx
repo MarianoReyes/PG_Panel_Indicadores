@@ -80,7 +80,7 @@ const DeteccionEnfermedadesNolayoutPage = () => {
       const formData = new FormData();
       formData.append('file', blob, 'planta.jpg'); // cambiando la clave a 'file'
   
-      const response = await fetch("https://api.agrointelligence.online/ml/plague-net/predict", {
+      const response = await fetch(import.meta.env.VITE_URL_DETECCION_ENFERMEDADES, {
         method: "POST",
         body: formData
       });

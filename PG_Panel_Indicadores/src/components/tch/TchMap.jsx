@@ -75,7 +75,7 @@ const TchMap = () => {
   useEffect(() => {
     const fetchGeoData = async () => {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/Jack200133/tchapi/master/data/outputgisv6.geojson', {
+        const response = await fetch(import.meta.env.VITE_URL_PREDICCION_TCH, {
           method: 'GET',
         });
         const data = await response.json();
