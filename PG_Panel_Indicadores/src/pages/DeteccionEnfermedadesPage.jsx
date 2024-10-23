@@ -3,6 +3,7 @@ import Joyride, { EVENTS, STATUS } from 'react-joyride';
 import { Container, Row, Col, Button,  Modal } from 'react-bootstrap';
 import Slider from '../components/home/Slider';
 import './DeteccionEnfermedadesPage.css';
+import { Oval } from 'react-loader-spinner';
 
 const DeteccionEnfermedadesPage = () => {
   const [prediction, setPrediction] = useState(null);
@@ -12,6 +13,7 @@ const DeteccionEnfermedadesPage = () => {
   const [tourKey, setTourKey] = useState(0);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleCloseErrorModal = () => setShowErrorModal(false);
 
@@ -59,6 +61,8 @@ const DeteccionEnfermedadesPage = () => {
       setShowErrorModal(true);
       return;
     }
+
+    setLoading(true);
   
     try {
       // Convertir base64 a blob para enviar como archivo jpg
@@ -80,6 +84,8 @@ const DeteccionEnfermedadesPage = () => {
       });
   
       const data = await response.json();
+
+      setLoading(false);
       setTrust(parseFloat((data.confidence * 100).toFixed(2)));
       setPrediction(data.prediction);
       
@@ -170,6 +176,14 @@ const DeteccionEnfermedadesPage = () => {
                 {image && <img src={image} alt="Uploaded" style={{ maxWidth: '100%', height: '400px' }} />}
               </Col>  
             </Row>
+            {loading ? (
+            <Row>              
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+                <Oval height={80} width={80} color="#fe7018" ariaLabel="loading" />
+              </div>
+            </Row>
+            ) : (
+            
             <Row className='my-5'>   
               <Col sm={12} xl={4}>
                 {prediction && trust >= 75 && <div><h3>Predicción: </h3><br></br><h2>{JSON.stringify(prediction)}</h2><br></br>
@@ -192,11 +206,12 @@ const DeteccionEnfermedadesPage = () => {
                 {prediction && trust < 75 && 
                 <div>
                   <h3>¡¡¡Precaución!!!</h3>
-                  <p className='text-justify'>La imágen ingresada probablemente no es una planta. Ingrese una imagen nueva.</p>
+                  <p className='text-justify'>Debido al porcentaje de confianza, la imágen ingresada probablemente no es una planta. Ingrese una imagen nueva.</p>
                 </div>
                 }
               </Col>
             </Row>
+            )}
           </Col>
         </Row>
       </Container>
