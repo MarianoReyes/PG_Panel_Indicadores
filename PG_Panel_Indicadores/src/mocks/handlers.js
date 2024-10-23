@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 export const handlers = [
   rest.get(import.meta.env.VITE_URL_PREDICCION_TCH, (req, res, ctx) => {
-    // Devuelve una respuesta mock de tu API
+    // Devuelve una respuesta mock del API
     const mockData = {
       type: 'FeatureCollection',
       features: [
@@ -25,7 +25,6 @@ export const handlers = [
             ],
           },
         },
-        // Puedes agregar más features mock si es necesario
       ],
     };
     return res(ctx.status(200), ctx.json(mockData));
