@@ -94,7 +94,7 @@ const DeteccionEnfermedadesNolayoutPage = () => {
         <Row className="my-5 justify-content-center">
           <Col sm={12} xl={8}>
             <p className="model-description">
-              Modelo de IA que detecta enfermedades en caña de azúcar mediante 
+              Modelo de IA que detecta enfermedades en plantas de caña de azúcar mediante 
               análisis de imágenes, permitiendo diagnóstico temprano y manejo eficiente de cultivos.
             </p>
             <Row className='my-5'>
@@ -126,14 +126,14 @@ const DeteccionEnfermedadesNolayoutPage = () => {
             
             <Row className='my-5'>   
               <Col sm={12} xl={4}>
-                {prediction && trust >= 75 && <div><h3>Predicción: </h3><br></br><h2>{JSON.stringify(prediction)}</h2><br></br>
+                {prediction && trust >= 50 && <div><h3>Predicción: </h3><br></br><h2>{JSON.stringify(prediction)}</h2><br></br>
                 <br></br></div>}
                 
                 {trust && <div><h3>Confianza: </h3><br></br><h2>{JSON.stringify(trust)}%</h2> <p>Confianza con la que se realiza la predicción en porcentaje.</p></div>}
               </Col>
 
               <Col sm={12} xl={8}>
-                {prediction && trust >= 75 && 
+                {prediction && trust >= 50 && 
                 <div>
                   <h3>Descripción de enfermedad</h3>
                   <p className='text-justify'>{enfermedadDescriptions[prediction]}</p>
@@ -143,10 +143,10 @@ const DeteccionEnfermedadesNolayoutPage = () => {
                 </div>
                 }
 
-                {prediction && trust < 75 && 
+                {prediction && trust < 50 && 
                 <div>
                   <h3>¡¡¡Precaución!!!</h3>
-                  <p className='text-justify'>Debido al porcentaje de confianza, la imágen ingresada probablemente no es una planta. Ingrese una imagen nueva..</p>
+                  <p className='text-justify'>Puede que tu imagen no sea una planta de caña de azúcar. Revisa la imagen subida.</p>
                 </div>
                 }
               </Col>
