@@ -199,7 +199,7 @@ const TchMap = () => {
               </li>
             ))}
           </ul>
-          <h5 className='mt-4'>Buscar por ID</h5>
+          <h5 className='mt-4'>Buscar por ID de Parcela</h5>
           <div className='d-flex'>
             <input type="text" value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="Ingrese el ID" className='inputsidebar' />
             <button style={{ width: '30%' }} className='button' onClick={handleSearch}>Buscar</button>
