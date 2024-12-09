@@ -126,7 +126,7 @@ const DeteccionEnfermedadesPage = () => {
         continuous={true}
         showSkipButton={true}
         showProgress={true}  
-        scrollToFirstStep={true}
+        scrollToFirstStep={false}
         key={tourKey}
         callback={handleJoyrideCallback}
         styles={{
