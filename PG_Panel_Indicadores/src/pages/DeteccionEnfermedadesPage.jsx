@@ -18,8 +18,11 @@ const DeteccionEnfermedadesPage = () => {
   const handleCloseErrorModal = () => setShowErrorModal(false);
 
   useEffect(() => {
-    setRunTour(true);
-    setTourKey(prevKey => prevKey + 1);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) {
+      setRunTour(true);
+      setTourKey(prevKey => prevKey + 1);
+    }
   }, []);
 
   const slides = [
