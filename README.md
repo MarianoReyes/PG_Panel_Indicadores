@@ -32,3 +32,10 @@ Este proyecto consiste en un panel de control interactivo desarrollado para el I
 - `npm run lint`: para la depuración de código
 - `npm run preview`: para el preview de vite
 
+## Demo
+
+- Se incluye una demostración de la aplicación web final en la carpeta /demo/ bajo el nombre "Demo.mp4".
+
+## Informe
+
+- Se incluye un informe final en la carpeta /docs/ bajo el nombre "Informe.pdf".
