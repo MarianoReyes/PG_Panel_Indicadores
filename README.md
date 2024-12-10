@@ -25,6 +25,7 @@ Este proyecto consiste en un panel de control interactivo desarrollado para el I
 
 - `cd PG_Panel_Indicadores`
 - `npm install`
+- `npm run dev`
 
 ### Comandos disponibles
 - `npm run dev`: para un entorno de producción
