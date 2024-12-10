@@ -13,20 +13,20 @@ Este proyecto consiste en un panel de control interactivo desarrollado para el I
 - Análisis en tiempo real de datos de cultivos
 - Compatibilidad con dispositivos móviles y de escritorio
 
-## Requisitos del Sistema
+## Instrucciones de Instalación
+
+### Requisitos del Sistema
 
 - Node.js (v14.0.0 o superior)
 - npm (v6.0.0 o superior)
-- Cuenta de ArcGIS Developer (para funcionalidades de mapeo)
 - Navegador web moderno (Chrome, Firefox, Safari, Edge)
 
-## Instalación
+### Instalación
 
 - `cd PG_Panel_Indicadores`
 - `npm install`
 
-
-## Comandos disponibles
+### Comandos disponibles
 - `npm run dev`: para un entorno de producción
 - `npm run build`: para el empaquetamiento
 - `npm run lint`: para la depuración de código
